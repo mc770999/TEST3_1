@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Library.Models.SetModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Book Sets</h1>
+@if (ViewBag.ErrorMessage != null)
+{
+	<span class="error-span" id="error" onclick="closeError()"> @ViewBag.ErrorMessage</span>
+}
+<p>
+	@Html.ActionLink("Create New", "Create", "Set", new { id = ViewBag.Id })
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					Set Name: @Html.DisplayFor(modelItem => item.Name)
+					<hr />
+					@foreach (var book in item.Books)
+					{
+						@if (book != null)
+						{
+							<h5>
+								@book.Name |
+								@Html.ActionLink("Delete", "Delete","Book", new { id = book.Id })
+							</h5>
+							<hr />
+						}
+					}
+				</td>
+				<td>
+					@Html.ActionLink("Add Book", "Create","Book", new { id = item.Id }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+				</td>
+				<hr />
+			</tr>
+		}
+	</tbody>
+</table>
+<script>
+	function closeError() {
+		document.getElementById("error").style.display = "none";
+	}
+</script>

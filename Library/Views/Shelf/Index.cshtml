@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Library.Models.ShelfModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Shelves</h1>
+<p>
+    @Html.ActionLink("Create New", "Create", "Shelf", new { id = ViewBag.Id })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Height
+            </th>
+            <th>
+                Width
+            </th>
+            <th>
+                LibraryId
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LibraryId)
+            </td>
+            <td>
+                @Html.ActionLink("set", "Index", "set", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { shelfid = item.Id, libraryid = ViewBag.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
